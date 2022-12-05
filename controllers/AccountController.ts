@@ -168,17 +168,14 @@ export default class AccountController {
             }
         })
     }
-
     validatePassWord(inputPassword: string) {
         let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         return regex.test(inputPassword);
     }
-
     validateEmail(inputEmail: string) {
         let regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         return regex.test(inputEmail);
     }
-
     writeData() {
         this.fileUser.writeFile(this.PATH, this.listUser);
     }

@@ -1,5 +1,5 @@
-may01,available,0,0
-may02,disable,0,0
+may01,available,0,22000
+may02,available,13,0
 may03,disable,0,0
 may04,disable,0,0
 may05,disable,0,0
@@ -17,6 +17,4 @@ may16,disable,0,0
 may17,disable,0,0
 may18,disable,0,0
 may19,disable,0,0
-may20,disable,0,0
-may21,disable,0,0
-may22,available,10,50000
+may21,available,10,0
