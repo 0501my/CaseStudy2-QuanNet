@@ -2,25 +2,25 @@ let input = require('readline-sync')
 import MachineController from '../controllers/MachineController'
 import AccountController from '../controllers/AccountController';
 
-export default class Menu{
+export default class Menu {
     private controller: MachineController
     private _MyAccount: string;
     private _MyPassword: string;
     private _AccountController: AccountController;
 
-    constructor(_MyAccount: string, _MyPassword: string, _AccountController: AccountController){
+    constructor(_MyAccount: string, _MyPassword: string, _AccountController: AccountController) {
         this.controller = new MachineController()
         this._MyAccount = _MyAccount
         this._MyPassword = _MyPassword
         this._AccountController = _AccountController
     }
 
-    public handleService(): void{
+    public handleService(): void {
         let index = parseInt(input.question("Chon 1 so ban muon them vao vao dich vu :"));
-        if(index > this.controller.arrMachineLength - 1){
+        if (index > this.controller.arrMachineLength - 1) {
             console.log("Không tồn tại !")
             console.log("\n----------------------Thêm dch vụ thất bại !-----------------------");
-        }else{
+        } else {
             let str = `
         --------------------------------
         1. CoCa : 10k
@@ -31,24 +31,24 @@ export default class Menu{
         `
             console.log(str)
             let n: number = 0;
-            while(n<1 || n>4){
+            while (n < 1 || n > 4) {
                 n = +(input.question("Chon 1 so: "));
-                if(n<1 || n>4){
+                if (n < 1 || n > 4) {
                     console.log("Xin vui long chon tu 1 den 4 !")
                 }
             }
-            switch(n){
+            switch (n) {
                 case 1:
-                    this.controller.addService(index,10000);
+                    this.controller.addService(index, 10000);
                     break;
                 case 2:
-                    this.controller.addService(index,10000);
+                    this.controller.addService(index, 10000);
                     break;
                 case 3:
-                    this.controller.addService(index,5000);
+                    this.controller.addService(index, 5000);
                     break;
                 case 4:
-                    this.controller.addService(index,12000);
+                    this.controller.addService(index, 12000);
                     break;
             }
             this.controller.displayMachines();
@@ -56,7 +56,7 @@ export default class Menu{
         }
     }
 
-    public mainMenu(){
+    public mainMenu() {
         let index: number;
         let menu: string = `
          ------------------Menu-------------
@@ -76,9 +76,9 @@ export default class Menu{
         `
         console.log(menu)
         let n: number = 0;
-        while(n<1 || n>12){
+        while (n < 1 || n > 12) {
             n = +(input.question("Chon so: "));
-            if(n<1 || n>12){
+            if (n < 1 || n > 12) {
                 console.log("Xin vui long chon tu 1 den 10 !")
             }
         }
@@ -113,9 +113,9 @@ export default class Menu{
             case 3:
                 this.controller.displayMachines();
                 index = parseInt(input.question("Chon 1 may ban muon cap nhat :"));
-                if(index > this.controller.arrMachineLength - 1){
+                if (index > this.controller.arrMachineLength - 1) {
                     console.log("Does not exist index !")
-                }else{
+                } else {
                     this.controller.updateMachine(index);
                     console.log("\n----------------------Cập nhật máy thành công !-----------------------");
                 }
@@ -123,9 +123,9 @@ export default class Menu{
             case 4:
                 this.controller.displayMachines();
                 index = parseInt(input.question("Chon may ban muon xoa :"));
-                if(index > this.controller.arrMachineLength - 1){
+                if (index > this.controller.arrMachineLength - 1) {
                     console.log("Does not exist index !")
-                }else{
+                } else {
                     let a: number;
                     let str = `
                         Bạn có thực sự muốn xóa máy này
@@ -134,7 +134,7 @@ export default class Menu{
                     `
                     console.log(str)
                     a = +(input.question("Chon so :"))
-                    if(a == 1){
+                    if (a == 1) {
                         this.controller.deleteMachine(index);
                         console.log("\n----------------------Xóa máy thành công !-----------------------");
                     }
@@ -158,7 +158,7 @@ export default class Menu{
                     `
                 console.log(str7)
                 let a7 = +(input.question("Chon 1 so: "));
-                switch(a7){
+                switch (a7) {
                     case 1:
                         this.controller.totalMoneyMachineAvailable();
                         this.controller.displayMachineAvailable()
@@ -183,7 +183,7 @@ export default class Menu{
                     `
                 console.log(str8)
                 let a8 = +(input.question("Chon 1 so: "));
-                switch(a8){
+                switch (a8) {
                     case 1:
                         this._AccountController.displayAllUsers();
                         break;
@@ -197,22 +197,22 @@ export default class Menu{
                         `
                         console.log(str)
                         let b = +(input.question("Lua chon cua ban :"))
-                        if(b == 1){
-                            this._AccountController.deleteUsers(index,this._MyAccount);
+                        if (b == 1) {
+                            this._AccountController.deleteUsers(index, this._MyAccount);
                         }
                         break;
                     case 3:
                         let currentPassword = input.question("Mat khau hien tai: ");
                         let newPassword1 = input.question("Mat khau moi : ");
                         let newPassword2 = input.question("Nhap lai mat khau : ");
-                        if(newPassword1 === newPassword2 && currentPassword === this._MyPassword){
-                            this._AccountController.changePassword(this._MyAccount,newPassword1)
+                        if (newPassword1 === newPassword2 && currentPassword === this._MyPassword) {
+                            this._AccountController.changePassword(this._MyAccount, newPassword1)
                         }
                         break;
                 }
                 break;
             case 9:
-                console.log("Tổng doanh thu là : " + this.controller.sumRevenue() );
+                console.log("Tổng doanh thu là : " + this.controller.sumRevenue());
                 console.log("\n----------------------Tổng doanh thu !-----------------------");
                 break;
             case 10:

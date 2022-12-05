@@ -9,7 +9,7 @@ export default class AccountController {
     private fileUser = new IOFile();
     private PATH = "./data/user.txt"
 
-    init() {
+    main() {
         let dataUser = this.fileUser.readFile(this.PATH)
         dataUser.forEach(e => {
             let arr = e.split(",");
@@ -67,7 +67,7 @@ export default class AccountController {
             }
         } catch (e: any) {
             console.log(e.message);
-            this.init()
+            this.main()
         }
         // this.login()
         console.log("---------------------------------------")
@@ -99,18 +99,18 @@ export default class AccountController {
                 if (!this.validatePassWord(newPassword)) {
                     console.log("Mật khẩu phải có ít nhất tám ký tự, ít nhất một chữ cái và một số !\n")
                     isErrorRegister = true;
-                    this.init();
+                    this.main();
                 }
 
                 if (!this.validateEmail(newEmail)) {
                     console.log("Email không hợp lệ !\n");
                     isErrorRegister = true;
-                    this.init();
+                    this.main();
                 } else {
                     if (this.listUser.some(e => e.userEmail == newEmail)) {
                         console.log("Email đã tồn tại !\n");
                         isErrorRegister = true;
-                        this.init();
+                        this.main();
                     }
                 }
                 this.listUser.push(new User(newAccount, newPassword, newName, newAge, newEmail))
@@ -119,12 +119,12 @@ export default class AccountController {
                 console.log("Tạo tài khoản thành công !")
                 break;
             } else {
-                this.init();
+                this.main();
             }
         }
         console.log("------------------------------------------")
 
-        this.init()
+        this.main()
     }
 
     public displayAllUsers() {
@@ -168,14 +168,17 @@ export default class AccountController {
             }
         })
     }
+
     validatePassWord(inputPassword: string) {
         let regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
         return regex.test(inputPassword);
     }
+
     validateEmail(inputEmail: string) {
         let regex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         return regex.test(inputEmail);
     }
+
     writeData() {
         this.fileUser.writeFile(this.PATH, this.listUser);
     }
